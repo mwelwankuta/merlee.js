@@ -1,0 +1,26 @@
+{
+  "name": "merlee.js",
+  "version": "0.0.0",
+  "description": "minimal node.js api framework",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "nodemon src/merlee.ts",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "nodejs",
+    "framework",
+    "api",
+    "server"
+  ],
+  "author": "Mwelwa Nkuta",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
