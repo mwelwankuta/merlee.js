@@ -16,10 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.6",
-    "formidable": "^2.0.1",
     "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
   }
 }
