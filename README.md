@@ -23,4 +23,4 @@ $ npm install merlee.js
 
 # License
 
-[Mit License]()
+[Mit License](./LICENSE)
