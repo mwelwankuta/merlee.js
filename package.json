@@ -1,10 +1,17 @@
 {
   "name": "merlee.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a minimal node.js api framework",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "nodemon src/merlee.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwelwankuta/merlee.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mwelwankuta/merlee.js/issues"
   },
   "keywords": [
     "nodejs",
@@ -12,6 +19,13 @@
     "api",
     "server"
   ],
+  "publishConfig": {
+    "access": "public",
+    "branches": [
+      "main"
+    ]
+  },
+  "homepage": "https://github.com/mwelwankuta/merlee.js#readme",
   "author": "Mwelwa Nkuta",
   "license": "MIT",
   "dependencies": {
