@@ -1,6 +1,6 @@
 /*
- * merlee.js
- * Copyright © Mwelwa Nkuta 2021 - Present
+ * merlee.js https://github.com/mwelwa/merlee.js
+ * Copyright © 2021 Mwelwa Nkuta <mwelwankuta@gmail.com>
  * MIT Licensed
  */
 

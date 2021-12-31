@@ -102,6 +102,37 @@ responses (`send`, `sendFile`, `render`)
 | `render` | sends processed ejs file to client |
 | `sendFile` | sends file to client |
 
+# routing
+creating a router
+
+```js
+// # routes/room.js
+module.exports = const router = () => {
+  return {
+    get:{
+      path:'/room',
+      callback(req, res){
+        res.send('hello from the router')
+      }
+    },
+    post:{
+      path:'/room',
+      callback(req, res){
+        res.send(req.body)
+      }
+    }
+  }
+}
+
+// # server.js
+const Merlee = require('merlee.js');
+const { router } = require('./routes/room');
+const app = new Merlee();
+
+
+app.handler(router);
+```
+
 # File Structure
 
 | file                            | description                             |
