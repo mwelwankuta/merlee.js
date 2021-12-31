@@ -1,6 +1,11 @@
 <h1 align="center">Merlee.js</h1>
 <p align="center"> a lighweight api framework for Node.js</p>
 
+![npm](https://img.shields.io/snyk/vulnerabilities/github/mwelwankuta/merlee.js)
+![npm](https://img.shields.io/npm/v/merlee.js)
+![npm](https://img.shields.io/npm/dt/start-repo)
+![npm](https://img.shields.io/github/license/mwelwankuta/merlee.js)
+
 ## Basic Example
 
 ```js
