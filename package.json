@@ -1,11 +1,11 @@
 {
   "name": "merlee.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a minimal node.js api framework",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "nodemon src/merlee.ts",
-    "lint":"eslint lib"
+    "lint": "eslint lib"
   },
   "repository": {
     "type": "git",
