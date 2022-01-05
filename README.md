@@ -150,3 +150,7 @@ app.handler(router);
 # License
 
 [MIT License](./LICENSE)
+
+# Documentation
+
+[How Merlee.js Works](./DOCUMENTATION.md)
