@@ -153,4 +153,4 @@ app.handler(router);
 
 # Documentation
 
-[How Merlee.js Works](./DOCUMENTATION.md)
+[More Detailed Documentaion](./DOCUMENTATION.md)
