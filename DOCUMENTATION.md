@@ -6,6 +6,17 @@ This repository contains the merlee.js source code. This repo is a work in progr
 - TypeScript support
 - Middleware support
 
+# Table of Contents
+- [Dislaimer](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#disclaimer)
+- [Prerequisites](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#prerequisites)
+- [Installation](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#installation)
+- [Hello World Example](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#hello-world-example)
+- [Basic Routing](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#basic-routing)
+- [App Options](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#app-options)
+- [Serving Static Files](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#serving-static-files)
+- [About the Author](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#author)
+
+
 # Disclaimer
 - This is a work in progress and should not be used in production
 
