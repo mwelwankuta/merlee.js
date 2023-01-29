@@ -1,6 +1,6 @@
 {
   "name": "merlee.js",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "a minimal node.js api framework",
   "main": "./lib/index.js",
   "scripts": {
