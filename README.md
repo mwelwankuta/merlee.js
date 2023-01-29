@@ -10,7 +10,7 @@
 
 ```js
 const merlee = require('merlee.js');
-const app = new merlee({ port: 8080, views: 'src/views' });
+const app = merlee({ port: 8080, views: 'src/views' });
 
 app.set('static', 'public');
 
@@ -58,7 +58,7 @@ $ yarn add merlee.js
 to initialize a new app
 
 ```js
-const app = new merlee({ port: 8080 });
+const app = merlee({ port: 8080 });
 ```
 
 the following methods can be passed to the app object
@@ -71,7 +71,7 @@ the following methods can be passed to the app object
 ## giving the app options
 
 ```js
-const app = new merlee({
+const app = merlee({
   port: 8080,
   views: 'src/ejs',
   static: 'public',

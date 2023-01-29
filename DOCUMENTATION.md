@@ -42,8 +42,8 @@ $ npm install merlee.js
 
 # Hello world example
 ```js
-const Merlee = require('merlee.js');
-const app = new Merlee();
+const merlee = require('merlee.js');
+const app = merlee();
 
 app.set('port', 3000)
 
@@ -106,19 +106,19 @@ to pass app options use the `set()` method. the Merlee object has a set method w
 
 Below is an example of how to pass app options
 ```js
-const app = new Merlee()
+const app = merlee()
 app.set('port', 3000)
 ```
 
 app options can be set by passing them directly to the Merlee class. For example
 ```js
-const app = new Merlee({port: 3000})
+const app = merlee({port: 3000})
 ```
 
 # Serving Static Files
 To serve static files such as css, images or other types of files. set the app option static to the directory you would like to be served by the server. Below is an example of how to set the static method
 ```js
-const app = new Merlee({static: './public'})
+const app = merlee({static: './public'})
 
 // or
 
@@ -140,7 +140,7 @@ this project is [MIT Licensed](./LICENSE)
 
 # Author
 
-- Twitter [@Merlee4t](https://twitter.com/Merlee4t)
-- Instagram [@merlee4t](https://instagram.com/Merlee4t)
+- Twitter [@mwelwankuta](https://twitter.com/mwelwankuta)
+- Instagram [@mwelwa_nkuta](https://instagram.com/mwelwa_nkuta)
 - Facebook [mwerwa](https://facebook.com/mwerwa)
-- Instagram [@merlee4t](https://instagram.com/Merlee4t)
+- LinkedIn [in/mwelwa](https://linkedin.com/in/mwelwa)
