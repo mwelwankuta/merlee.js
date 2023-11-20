@@ -7,40 +7,39 @@
 /**
  * module imports
  */
-const http = require('http');
-const fs = require('fs');
-
-const morgan = require('morgan');
-const logger = morgan('dev');
-const parseUrl = require('parseurl');
-
-const nodepath = require('path');
-const ejs = require('ejs');
-const fileTypes = require('./fileTypes');
-const body = require('./body');
-const router = require('./router');
-const _static = require('./static');
-const lower = require('./utils/lower');
-const stringify = require('./utils/stringify');
+import fs from 'fs';
+import http from 'http';
+import logger from 'dev';
+import parseUrl from 'parseurl';
+import ejs from 'ejs';
+import nodepath from 'path';
+import body from './body';
+import { fileTypes } from './file-types';
+import router from './router';
+import _static from './static';
+import lower from './utils/lower';
+import stringify from './utils/stringify';
 
 class Merlee {
+  options: any;
+  server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
   /**
-    *  @param {({
-    *   port: number,
-    *   views: string,
-    *   static: string
-    *  })} options merlee.js config
+   *  @param {({
+   *   port: number,
+   *   views: string,
+   *   static: string
+   *  })} options merlee.js config
    */
   constructor(options) {
     this.options = options;
 
     this.server = http.createServer((req, res) => {
       const callback = () => {
-        return {req, res};
+        return { req, res };
       };
       req.setEncoding('utf-8');
 
-      this.handler({path: null, method: ''}, callback);
+      this.handler({ path: null, method: '' }, callback);
     });
     this.server.setMaxListeners(0);
   }
@@ -62,7 +61,7 @@ class Merlee {
    */
 
   handler(options, callback) {
-    const {path, method = 'get'} = options;
+    const { path, method = 'get' } = options;
 
     this.server.on('request', (req, res) => {
       // error cannot set headers after they have been sent
@@ -81,7 +80,7 @@ class Merlee {
 
       const params = {};
 
-      const {query} = parseUrl(req);
+      const { query } = parseUrl(req);
       const search = new URLSearchParams(query);
 
       if (search) {
@@ -103,10 +102,10 @@ class Merlee {
        * @return {any}
        */
       function param(name) {
-        if(params[name]) {
+        if (params[name]) {
           return params[name];
         }
-        return ""
+        return '';
       }
 
       /**
@@ -130,8 +129,8 @@ class Merlee {
       }
 
       const reqUrl = req.url.split('?')[0];
-      const response = {...res, send, render, sendFile, redirect};
-      const request = {...req, params, param};
+      const response = { ...res, send, render, sendFile, redirect };
+      const request = { ...req, params, param };
 
       // request is from router
       if (typeof options == 'function') {
@@ -264,9 +263,9 @@ class Merlee {
 
   set(option, value) {
     const options = this.options;
-    const newOption = {[option]: value};
+    const newOption = { [option]: value };
 
-    this.options = {...options, ...newOption};
+    this.options = { ...options, ...newOption };
   }
 
   /**
@@ -274,11 +273,10 @@ class Merlee {
    * ```js
    * app.listen(port => console.log("listening on port " + port)
    * ```
-   * @param  {(port : number) => void} callback
    * returns port server is running on
    */
 
-  listen(callback) {
+  listen(callback: (port: number) => void) {
     const port = this.options.port;
     this.server.listen(port);
 
@@ -287,7 +285,7 @@ class Merlee {
 }
 
 function exposeMerlee(params) {
-  return new Merlee(params)
+  return new Merlee(params);
 }
 
 /**

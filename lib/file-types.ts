@@ -3,9 +3,10 @@
  * Copyright © Mwelwa Nkuta 2021
  * MIT Licensed
  */
-const path = require('path');
+import path from 'path';
 
-module.exports = function fileTypes(filePath) {
+// TODO: check content type with package
+export function fileTypes(filePath: string) {
   let contentType = 'text/html';
 
   switch (path.extname(filePath)) {
@@ -75,4 +76,4 @@ module.exports = function fileTypes(filePath) {
       break;
   }
   return contentType;
-};
+}

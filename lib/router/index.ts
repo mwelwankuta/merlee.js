@@ -4,7 +4,8 @@
  * MIT Licensed
  */
 
-const lower = require('../utils/lower');
+import { IncomingMessage, ServerResponse } from 'http';
+import lower from '../utils/lower';
 /**
  * @param  {object | function} options
  * @param  {IncomingMessage} req
@@ -12,8 +13,22 @@ const lower = require('../utils/lower');
  * @param  {any} request
  * @param  {any} response
  */
-module.exports = function router(options, req, res, request, response) {
-  const routerRoutes = options();
+
+interface RouterParams {
+  options: object | Function;
+  req: IncomingMessage;
+  res: ServerResponse;
+  request: any;
+  response: any;
+}
+export default function router(
+  options: object | Function,
+  req: IncomingMessage,
+  res: ServerResponse,
+  request: any,
+  response: any
+) {
+  const routerRoutes = typeof options == 'function' ? options() : options;
 
   const sendResponse = (callback) => {
     return callback(request, response);
@@ -21,7 +36,7 @@ module.exports = function router(options, req, res, request, response) {
 
   for (const routerRoute in routerRoutes) {
     if (Object.prototype.hasOwnProperty.call(routerRoutes, routerRoute)) {
-      const {path, callback} = routerRoutes[routerRoute];
+      const { path, callback } = routerRoutes[routerRoute];
 
       const method = routerRoute;
 
@@ -41,4 +56,4 @@ module.exports = function router(options, req, res, request, response) {
       res.writeHead(200);
     }
   }
-};
+}

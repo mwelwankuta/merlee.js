@@ -9,6 +9,7 @@
  * @param {string} data
  */
 
-module.exports = function(data) {
-  return data.toLowerCase();
-};
+export default function (data: string | undefined) {
+  if (data) return data.toLowerCase();
+  return '';
+}

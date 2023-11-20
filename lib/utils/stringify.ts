@@ -12,7 +12,8 @@ function filter() {
    */
 
   return (key, value) => {
-    const isCircular = i !== 0 &&
+    const isCircular =
+      i !== 0 &&
       typeof censor === 'object' &&
       typeof value == 'object' &&
       censor == value;
@@ -27,6 +28,6 @@ function filter() {
   };
 }
 
-module.exports = function stringify(data) {
+export default function stringify(data) {
   return JSON.stringify(data, filter());
-};
+}

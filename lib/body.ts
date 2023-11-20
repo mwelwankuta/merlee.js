@@ -4,16 +4,22 @@
  * MIT Licensed
  */
 
-const lower = require('./utils/lower');
+import { IncomingMessage, ServerResponse } from 'http';
+import lower from './utils/lower';
 
-/**
- * @param  {IncomingMessage} req
- * @param  {ServerResponse} response
- * @param  {string} data
- * @param  {(req: http.IncomingMessage, res: ServerResponse) => void} callback
- */
+interface BodyHandlers {
+  req: IncomingMessage;
+  response: ServerResponse;
+  data: string;
+  callback: (req: IncomingMessage, res: ServerResponse) => void;
+}
 
-module.exports = function bodyHandlers(req, response, data, callback) {
+export default function bodyHandlers({
+  callback,
+  data,
+  req,
+  response,
+}: BodyHandlers) {
   let body = {};
 
   try {
@@ -39,7 +45,7 @@ module.exports = function bodyHandlers(req, response, data, callback) {
     });
   }
 
-  const request = {...req, body};
+  const request = { ...req, body } as IncomingMessage & { body: string };
   if (lower(req.method) === 'post') {
     return callback(request, response);
   } else if (lower(req.method) === 'put') return callback(request, response);
@@ -49,4 +55,4 @@ module.exports = function bodyHandlers(req, response, data, callback) {
    * garbage collection
    **/
   body = {};
-};
+}
