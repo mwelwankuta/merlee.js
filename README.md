@@ -10,9 +10,7 @@
 
 ```js
 const merlee = require('merlee.js');
-const app = merlee({ port: 8080, views: 'src/views' });
-
-app.set('static', 'public');
+const app = merlee({ port: 8080, views: 'src/views', static: 'public' });
 
 //  get request
 app.handler({ path: '/', method: 'get' }, (req, res) => {
@@ -31,7 +29,7 @@ app.handler({ path: '/', method: 'post' }, (req, res) => {
   res.send({ ...req.body }, 201);
 });
 
-app.listen(port => console.log(`listening on port ${port}`));
+app.listen((port) => console.log(`listening on port ${port}`));
 ```
 
 would like to learn more about ejs ? click this [link](https://ejs.co/)
@@ -78,12 +76,6 @@ const app = merlee({
 });
 ```
 
-the above options can also be set like in the example below
-
-```js
-app.set('views', 'src/ejs');
-```
-
 # handling requests
 
 ```js
@@ -108,6 +100,7 @@ responses (`send`, `sendFile`, `render`)
 | `sendFile` | sends file to client |
 
 # routing
+
 creating a router
 
 ```js
