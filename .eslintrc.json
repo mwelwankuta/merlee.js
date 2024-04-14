@@ -1,17 +1,14 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-    },
-    "extends": [
-        "google"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 13
-    },
-    "rules": {
-        "require-jsdoc":"off",
-        "no-invalid-this":"off"
-    }
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 13
+  },
+  "rules": {
+    "require-jsdoc": "off",
+    "no-invalid-this": "off"
+  }
 }
