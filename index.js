@@ -6,4 +6,5 @@
 
 'use strict';
 
-module.exports = require('./lib/merlee');
+// module.exports = require('./lib/merlee');
+export * from './lib/merlee.js';
