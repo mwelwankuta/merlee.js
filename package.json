@@ -3,6 +3,7 @@
   "version": "0.0.8",
   "description": "a minimal node.js api framework",
   "main": "./lib/index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/merlee.ts",
     "lint": "eslint lib"
