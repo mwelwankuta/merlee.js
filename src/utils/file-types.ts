@@ -3,10 +3,9 @@
  * Copyright © Mwelwa Nkuta 2021
  * MIT Licensed
  */
-// const path = require('path');
 import path from 'path';
 
-export default function fileTypes(filePath) {
+export default function fileTypes(filePath: string) {
   let contentType = 'text/html';
 
   switch (path.extname(filePath)) {

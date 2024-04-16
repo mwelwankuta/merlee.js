@@ -4,29 +4,44 @@
  * MIT Licensed
  */
 
-import http from 'http';
+import ejs, { Data } from 'ejs';
 import fs from 'fs';
+import http, { IncomingMessage } from 'http';
 import morgan from 'morgan';
-const logger = morgan('dev');
 import parseUrl from 'parseurl';
 import nodepath from 'path';
-import ejs from 'ejs';
-import fileTypes from './utils/file-types.js';
 import body from './body.js';
-import router from './router.js';
-import _static from './static.js';
+import router from './router';
+import _static from './static';
+import {
+  HandlerCallback,
+  HandlerFunction,
+  HandlerOptions,
+} from './types/index.js';
+import fileTypes from './utils/file-types.js';
 import lower from './utils/lower.js';
-import { stringify, isJSON } from './utils/stringify.js';
+import { isJSON, stringify } from './utils/stringify.js';
+import { Request, Response } from './types/index.js';
+
+const logger = morgan('dev');
+
+interface MerleeOptions {
+  port: number | string;
+  views?: string;
+  static?: string;
+  middleware?: HandlerFunction[];
+}
 
 class Merlee {
-  /**
-   *  @param {({
-   *   port: number,
-   *   views: string,
-   *   static: string
-   *  })} options merlee.js config
-   */
-  constructor(options = {}) {
+  options: MerleeOptions = {
+    port: 0,
+    views: '',
+    static: '',
+    middleware: [],
+  };
+  server: http.Server;
+
+  constructor(options: MerleeOptions) {
     this.options = options;
 
     this.server = http.createServer((req, res) => {
@@ -43,53 +58,47 @@ class Merlee {
    *    res.send({name: "merlee.js", language:"javascript"})
    * })
    * ```
-   * @param  {{
-   *   path: string,
-   *   method:"get" | "post" | "put" | "delete"
-   * }} options
    */
-  //TODO: implement type for handler @param {(req: {...http.IncomingMessage, send: Function}, res: http.ServerResponse) => void} callback
 
-  handler(options, callback) {
+  handler(options: HandlerOptions, callback: HandlerCallback) {
     const { path, method = 'get' } = options;
 
-    this.server.on('request', (req, res) => {
+    this.server.on('request', (req: Request, res: Response) => {
       // error cannot set headers after they have been sent
       _static(req, res, this.options.static);
 
-      // go through all the middleware and check if the "next" function has been called in the last 
+      // go through all the middleware and check if the "next" function has been called in the last
       // middleware
 
       let cmw = 0; // current middleware
       const midw = this.options.middleware;
       let calledNextAtEnd = false;
-      
+
       const next = () => {
-        if (cmw < midw.length - 1) {
+        if (midw && cmw < midw.length - 1) {
           cmw++;
           midw[cmw](req, res, next);
-        } else if (cmw == midw.length - 1) {
+        } else if (midw && cmw == midw.length - 1) {
           calledNextAtEnd = true;
         }
-      }
+      };
 
-        if (midw && midw?.length > 0) {
-          midw[0](req, res, next);
-          if (!calledNextAtEnd) {
-            return; // return if next was not called at the end of the middleware chain
-          }
+      if (midw && midw?.length > 0) {
+        midw[0](req, res, next);
+        if (!calledNextAtEnd) {
+          return; // return if next was not called at the end of the middleware chain
         }
-      
+      }
 
       /**
        * get url search parameters from req.url
        */
-      const params = {};
+      const params: Record<string, string> = {};
 
-      const { query } = parseUrl(req);
-      const search = new URLSearchParams(query);
+      const url = parseUrl(req as unknown as IncomingMessage);
 
-      if (search) {
+      if (url?.query) {
+        const search = new URLSearchParams(url.query as Record<string, string>);
         const pairs = search.toString().split('&');
 
         pairs.forEach((pair) => {
@@ -104,10 +113,8 @@ class Merlee {
        * ```js
        * req.param('query')
        * ```
-       * @param {string} name
-       * @return {any}
        */
-      function param(name) {
+      function param(name: string): string {
         if (params[name]) {
           return params[name];
         }
@@ -119,10 +126,8 @@ class Merlee {
        * ```js
        * res.send({message: 'hello world', status:200})
        * ```
-       * @param {any} body
-       * @param {number} status
        */
-      function send(body, status = 200) {
+      function send(body: unknown, status = 200) {
         let response = '';
 
         try {
@@ -143,42 +148,10 @@ class Merlee {
         } else {
           res.writeHead(status, {
             'Content-Type': 'text/html; charset=utf-8',
-            'Content-Length': Buffer.byteLength(body, 'utf8'),
+            'Content-Length': Buffer.byteLength(body as string, 'utf8'),
           });
           res.end(body);
         }
-      }
-
-      const reqUrl = req.url.split('?')[0];
-      const response = { ...res, send, render, sendFile, redirect };
-      const request = { ...req, params, param };
-
-      // request is from router
-      if (typeof options == 'function') {
-        return router(options, req, res, request, response);
-      } else {
-        if (path === reqUrl && lower(method) === lower(req.method)) {
-          if (lower(req.method) === 'get') return callback(request, response);
-
-          // request contains data
-          return req.on('data', (data) => body(req, response, data, callback));
-        }
-        return () => {
-          res.writeHead(404, { 'Content-Type': 'text/html' });
-          res.end();
-        };
-      }
-
-      /**
-       * redirects request to a different path,
-       * by default redirects to the url `/`
-       * ```js
-       * res.redirect('/help')
-       * ```
-       * @param  {string} path
-       */
-      function redirect(path = '/') {
-        req.url = path;
       }
 
       /**
@@ -186,12 +159,9 @@ class Merlee {
        * ```js
        * res.render({file: 'hello.html', status:200})
        * ```
-       * @param {string} file
-       * @param {{any[any]}} data
-       * @param {number} status
        */
 
-      function render(file = 'index', data, status = 200) {
+      const render = (file = 'index', data: Data, status = 200) => {
         let fileName = file;
         // extension
         if (!nodepath.extname(file)) fileName = `${file}.ejs`;
@@ -216,15 +186,53 @@ class Merlee {
           'Content-Length': Buffer.byteLength(html, 'utf8'),
         });
         res.end(html);
+      };
+
+      const reqUrl = req.url?.split('?')[0];
+      const response = {
+        ...res,
+        send,
+        render,
+        sendFile,
+        redirect,
+      } as unknown as Response;
+
+      const request = { ...req, params, param } as unknown as Request;
+
+      // request is from router
+      if (typeof options != 'function') {
+        if (path === reqUrl && lower(method) === lower(req.method)) {
+          if (lower(req.method) === 'get') return callback(request, response);
+
+          // request contains data
+          return req.on('data', (data) => body(req, response, data, callback));
+        }
+
+        return () => {
+          res.writeHead(404, { 'Content-Type': 'text/html' });
+          res.end();
+        };
+      } else {
+        return router(options, req, res, request, response);
       }
+
+      /**
+       * redirects request to a different path,
+       * by default redirects to the url `/`
+       * ```js
+       * res.redirect('/help')
+       * ```
+       */
+      function redirect(path: string = '/') {
+        req.url = path;
+      }
+
       /**
        * ```js
        * res.sendFile('/path/to/file')
        * ```
-       * @param  {string} file
-       * @param  {number} status
        */
-      function sendFile(file, status = 200) {
+      function sendFile(file: string, status = 200) {
         let fileName = file;
         // extension
         if (!nodepath.extname(file)) fileName = `${file}.html`;
@@ -266,11 +274,8 @@ class Merlee {
    * ```js
    * app.listen(port => console.log("listening on port " + port)
    * ```
-   * @param  {(port : number) => void} callback
-   * returns port server is running on
    */
-
-  listen(callback) {
+  listen(callback: (port: number | string) => void) {
     const port = this.options.port;
     this.server.listen(port);
 
@@ -280,12 +285,9 @@ class Merlee {
 
 /**
  * Expose Merlee
- * @param {{
- *  port: number,
- *  static: string
- * }} params
- * @returns
  */
-export default function (params) {
+export default function merlee(params: MerleeOptions) {
   return new Merlee(params);
 }
+
+export * from './types/index';

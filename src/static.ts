@@ -5,15 +5,15 @@
  */
 import fs from 'fs';
 import nodePath from 'path';
+import { Request, Response } from './types/index';
 import fileTypes from './utils/file-types.js';
 
-/**
- * @param {require("http").IncomingMessage} req
- * @param {require("http").ServerResponse} res
- * @param {string} staticOption
- */
-export default function serveStatic(req, res, staticOption) {
-  if (req.url.includes(staticOption)) {
+export default function serveStatic(
+  req: Request,
+  res: Response,
+  staticOption?: string
+) {
+  if (staticOption && req.url?.includes(staticOption)) {
     const staticPath = nodePath.resolve(process.cwd());
 
     const stream = fs.createReadStream(nodePath.join(staticPath, req.url));
@@ -23,6 +23,7 @@ export default function serveStatic(req, res, staticOption) {
       res.writeHead(404, { 'Content-Type': contentType });
       res.end(err.message);
     });
+
     stream.pipe(res);
   }
 }

@@ -4,21 +4,18 @@
  * MIT Licensed
  */
 
+import { Request, Response } from './types/index.js';
 import lower from './utils/lower.js';
 
-/**
- * @param  {object | function} options
- * @param  {IncomingMessage} req
- * @param  {ServerResponse} res
- * @param  {any} request
- * @param  {any} response
- */
-export default function router(options, req, res, request, response) {
+// TODO: options can either be function or record?
+export default function router<T extends Function>(
+  options: T,
+  req: Request,
+  res: Response,
+  request: unknown,
+  response: unknown
+) {
   const routerRoutes = options();
-
-  const sendResponse = (callback) => {
-    return callback(request, response);
-  };
 
   for (const routerRoute in routerRoutes) {
     if (Object.prototype.hasOwnProperty.call(routerRoutes, routerRoute)) {
@@ -31,8 +28,7 @@ export default function router(options, req, res, request, response) {
           req.url == lower(path) && lower(req.method) == lower(method);
 
         if (isSameRoute) {
-          sendResponse(callback);
-          return;
+          return callback(request, response);
         }
       } catch (error) {
         console.error(new Error(error));
