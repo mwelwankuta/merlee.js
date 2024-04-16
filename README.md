@@ -10,11 +10,6 @@
 
 merlee.js is a backend nodejs rest api framework that lets you focus on the backend web fundamentals to deliver a simple and resilient apis that deploy to any Node.js server environments
 
-This repository contains the merlee.js source code. This repo is a work in progress. and more features are being implemented such as
-
-- [ ] TypeScript support
-- [ ] Middleware support
-
 # Table of Contents
 
 - [Dislaimer](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#disclaimer)
@@ -107,6 +102,21 @@ function routes() {
 }
 ```
 
+# Middleware
+
+The following examples illustrate how middleware can be used
+
+```js
+const app = merlee({
+  port: 3000,
+  middleware: [checkAuth, checkSubscription],
+});
+
+app.handler({ method: 'GET', path: '/', middleware: [isAdmin] }, (req, res) => {
+  // code goes here...
+});
+```
+
 the method used on the endpoint is defined by the name of the key.
 
 # App Options
@@ -175,7 +185,6 @@ app.listen((port) => console.log(`listening on port ${port}`));
 ```
 
 would like to learn more about ejs ? click this [link](https://ejs.co/)
-
 
 # Creating an app
 
@@ -273,7 +282,6 @@ feel free to contribute and make merlee.js a better package.
 # License
 
 [MIT License](./LICENSE)
-
 
 # License
 
