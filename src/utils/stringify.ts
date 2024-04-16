@@ -10,12 +10,12 @@ function createCircularFilter() {
 
   /**
    * Filter function to handle circular references and depth limit
-   * @param  {any} key
-   * @param  {any} value
-   * @param  {number} depth
-   * @return {any} value
    */
-  function circularFilter(key, value, depth) {
+  function circularFilter(
+    _key: string,
+    value: unknown,
+    depth: number
+  ): unknown {
     if (depth > MAX_DEPTH) return '[Unknown]';
 
     if (typeof value === 'object' && value !== null) {
@@ -31,16 +31,14 @@ function createCircularFilter() {
 
 /**
  * Stringify function with circular reference handling
- * @param  {any} data
- * @return {string} JSON string
  */
-export function stringify(data) {
+export function stringify(data: unknown): string {
   const circularFilter = createCircularFilter();
 
   return JSON.stringify(data, (key, value) => circularFilter(key, value, 0));
 }
 
-export function isJSON(str) {
+export function isJSON(str: string) {
   try {
     const parsed = JSON.parse(str);
     if (parsed && typeof parsed === 'object') {

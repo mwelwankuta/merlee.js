@@ -2,10 +2,15 @@
   "name": "merlee.js",
   "version": "0.0.8",
   "description": "a minimal node.js api framework",
-  "main": "./lib/merlee.js",
-  "type": "module",
+  "main": "./dist/merlee.js",
+  "module": "./dist/merlee.mjs",
+  "types": "./dist/merlee.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "lint": "eslint lib",
+    "lint": "eslint src",
+    "build": "tsup",
     "link": "npm link"
   },
   "repository": {
@@ -36,7 +41,13 @@
     "parseurl": "^1.3.3"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.12.7",
+    "@types/parseurl": "^1.3.3",
     "eslint": "^8.5.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
   }
 }
