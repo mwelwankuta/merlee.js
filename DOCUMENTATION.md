@@ -50,7 +50,8 @@ $ npm install merlee.js
 # Hello world example
 
 ```js
-const merlee = require('merlee.js');
+// const merlee = require('merlee.js');
+import merlee from 'merlee.js';
 const app = merlee({
   port: 3000,
 });

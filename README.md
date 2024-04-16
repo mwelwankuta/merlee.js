@@ -9,7 +9,8 @@
 ## Basic Example
 
 ```js
-const merlee = require('merlee.js');
+// const merlee = require('merlee.js');
+import merlee from 'merlee.js';
 const app = merlee({ port: 8080, views: 'src/views', static: 'public' });
 
 //  get request
@@ -123,8 +124,10 @@ module.exports = const router = () => {
 }
 
 // # server.js
-const Merlee = require('merlee.js');
-const { router } = require('./routes/room');
+// const Merlee = require('merlee.js');
+// const { router } = require('./routes/room');
+import Merlee from 'merlee.js'
+import {router} from './routes/room'
 const app = new Merlee();
 
 
