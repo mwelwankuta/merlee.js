@@ -5,6 +5,7 @@
     "es2021": true
   },
   "parserOptions": {
+    "sourceType": "module",
     "ecmaVersion": 13
   },
   "rules": {

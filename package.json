@@ -5,8 +5,8 @@
   "main": "./lib/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/merlee.ts",
-    "lint": "eslint lib"
+    "lint": "eslint lib",
+    "link": "npm link"
   },
   "repository": {
     "type": "git",
