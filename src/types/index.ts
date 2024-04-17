@@ -7,15 +7,15 @@ export interface Response extends ServerResponse {
   sendFile: (file: string, status: number) => void;
   redirect: (path: string) => void;
 }
-export interface Request extends IncomingMessage {
+export interface Request<T extends any> extends IncomingMessage {
   query: unknown;
   params: Record<string, string>;
   param: (name: string) => string;
-  body?: any;
+  body?: T;
 }
 
 export interface HandlerCallback {
-  (req: Request, res: Response): void;
+  (req: Request<any>, res: Response): void;
 }
 
 type RequestMethod =
@@ -36,7 +36,7 @@ export interface HandlerOptions {
 
 export type NextFunction = (err?: Error) => void;
 export type HandlerFunction = (
-  req: Request,
+  req: Request<any>,
   res: Response,
   next?: NextFunction
 ) => void;
