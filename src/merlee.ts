@@ -63,7 +63,7 @@ class Merlee {
   handler(options: HandlerOptions, callback: HandlerCallback) {
     const { path, method = 'get' } = options;
 
-    this.server.on('request', (req: Request, res: Response) => {
+    this.server.on('request', (req: Request<any>, res: Response) => {
       // error cannot set headers after they have been sent
       _static(req, res, this.options.static);
 
@@ -197,7 +197,7 @@ class Merlee {
         redirect,
       } as unknown as Response;
 
-      const request = { ...req, params, param } as unknown as Request;
+      const request = { ...req, params, param } as unknown as Request<any>;
 
       // request is from router
       if (typeof options != 'function') {
