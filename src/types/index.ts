@@ -15,7 +15,7 @@ export interface Request<T extends any> extends IncomingMessage {
 }
 
 export interface HandlerCallback {
-  (req: Request<any>, res: Response): void;
+  (req: Request<any>, res: Response, next?:HandlerFunction): void;
 }
 
 type RequestMethod =
