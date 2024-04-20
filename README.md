@@ -17,8 +17,11 @@ merlee.js is a backend nodejs rest api framework that lets you focus on the back
 - [Installation](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#installation)
 - [Hello World Example](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#hello-world-example)
 - [Basic Routing](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#basic-routing)
+- [Middleware](#middleware)
 - [App Options](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#app-options)
 - [Serving Static Files](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#serving-static-files)
+- [Contributing](#contributing)
+- [File Structure](#file-structure)
 - [About the Author](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#author)
 
 # Prerequisites
