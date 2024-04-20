@@ -24,6 +24,15 @@ merlee.js is a backend nodejs rest api framework that lets you focus on the back
 - [File Structure](#file-structure)
 - [About the Author](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#author)
 
+## Disclaimer
+
+**merlee.js** is provided as-is, without any warranty or guarantee of fitness for any particular purpose. While efforts have been made to ensure the reliability and accuracy of the software, the developers cannot be held responsible for any damages or liabilities arising from the use of this software.
+
+Please use **merlee.js** responsibly and ensure that you understand its capabilities and limitations before integrating it into your projects. Additionally, keep in mind that **merlee.js** may be subject to changes and updates, so it's recommended to stay informed about the latest developments and updates.
+
+By using **merlee.js**, you agree to the terms and conditions outlined in the [MIT License](./LICENSE). If you have any questions or concerns, please don't hesitate to reach out to the developers or consult the documentation.
+
+
 # Prerequisites
 
 - [Nodejs](https://nodejs.dev/) a free, open-sourced, cross-platform JavaScript run-time environment that lets developers write command line tools and server-side scripts outside of a browser.
