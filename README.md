@@ -39,7 +39,7 @@ By using **merlee.js**, you agree to the terms and conditions outlined in the [M
 
 # Installation
 
-Assuming your already have [Nodejs](https://nodejs.dev/) installed on your machine. create a directory to hold your application. and change directory into the newly created directory
+Assuming you already have [Nodejs](https://nodejs.dev/) installed on your machine. create a directory to hold your application and `cd` into the newly created folder
 
 ```
 $ mkdir my-app
@@ -90,9 +90,8 @@ app.handler({ method: 'GET', path: '/' }, (req, res) => {
 });
 ```
 
-Real world projects often have different routes in different directories because of this merlee.js has an inbuilt routing system. to use the merlee.js router
-
-- create a new javascript file that has a function that returns an objects of objects that have router configuration. For example
+Real world projects often have different routes in different directories, because of this merlee.js has an inbuilt routing system. 
+To use the merlee.js router, create a new javascript file that has a function that returns embedded objects that have router configuration. For example
 
 ```js
 // routes.js
@@ -137,15 +136,9 @@ to pass app options use the `set()` method. the Merlee object has a set method w
 
 | option | description                             |
 | ------ | --------------------------------------- |
-| port   | sets a port that the server runs on     |
-| views  | sets a path to the ejs files directory  |
-| static | serves files in the directory as static |
-
-Below is an example of how to pass app options
-
-```js
-const app = merlee({ port: 3000 });
-```
+| `port`   | sets a port that the server runs on     |
+| `views`  | sets a path to the ejs files directory  |
+| `static` | serves files in the directory as static |
 
 app options can be set by passing them directly to the Merlee class. For example
 
@@ -169,34 +162,6 @@ http://localhost:3000/public/style.css
 http://localhost:3000/public/app.js
 http://localhost:3000/public/cat.png
 ```
-
-## Basic Example
-
-```js
-import merlee from 'merlee.js';
-const app = merlee({ port: 8080, views: 'src/views', static: 'public' });
-
-//  get request
-app.handler({ path: '/', method: 'get' }, (req, res) => {
-  res.send('Hello World!');
-});
-
-app.handler({ path: '/home', method: 'get' }, async (req, res) => {
-  const posts = await Posts.find({});
-
-  // supports ejs out of the box;
-  res.render('home', { posts });
-});
-
-// post request
-app.handler({ path: '/', method: 'post' }, (req, res) => {
-  res.send({ ...req.body }, 201);
-});
-
-app.listen((port) => console.log(`listening on port ${port}`));
-```
-
-would like to learn more about ejs ? click this [link](https://ejs.co/)
 
 # Creating an app
 
@@ -277,6 +242,34 @@ const app = new Merlee();
 
 app.handler(router);
 ```
+## Basic Example
+
+```js
+import merlee from 'merlee.js';
+const app = merlee({ port: 8080, views: 'src/views', static: 'public' });
+
+//  get request
+app.handler({ path: '/', method: 'get' }, (req, res) => {
+  res.send('Hello World!');
+});
+
+app.handler({ path: '/home', method: 'get' }, async (req, res) => {
+  const posts = await Posts.find({});
+
+  // supports ejs out of the box;
+  res.render('home', { posts });
+});
+
+// post request
+app.handler({ path: '/', method: 'post' }, (req, res) => {
+  res.send({ ...req.body }, 201);
+});
+
+app.listen((port) => console.log(`listening on port ${port}`));
+```
+
+would like to learn more about ejs ? click this [link](https://ejs.co/)
+
 
 # Contributing
 
