@@ -12,17 +12,16 @@ merlee.js is a backend nodejs rest api framework that lets you focus on the back
 
 # Table of Contents
 
-- [Dislaimer](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#disclaimer)
-- [Prerequisites](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#prerequisites)
-- [Installation](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#installation)
-- [Hello World Example](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#hello-world-example)
-- [Basic Routing](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#basic-routing)
+- [Dislaimer](#disclaimer)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Hello World Example](#hello-world-example)
+- [Basic Routing](#basic-routing)
 - [Middleware](#middleware)
-- [App Options](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#app-options)
-- [Serving Static Files](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#serving-static-files)
+- [App Options](https://github.com/mwelwankuta/merlee.js/blob/main/README.md#app-options)
+- [Serving Static Files](https://github.com/mwelwankuta/merlee.js/blob/main/README.md#serving-static-files)
 - [Contributing](#contributing)
 - [File Structure](#file-structure)
-- [About the Author](https://github.com/mwelwankuta/merlee.js/blob/main/DOCUMENTATION.md#author)
 
 ## Disclaimer
 
