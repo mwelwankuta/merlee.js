@@ -8,7 +8,7 @@
 
 # Welcome to merlee.js!
 
-merlee.js is a backend nodejs rest api framework that lets you focus on the backend web fundamentals to deliver a simple and resilient apis that deploy to any Node.js server environments
+merlee.js is a backend nodejs rest api framework that i built when i was bored
 
 # Table of Contents
 
